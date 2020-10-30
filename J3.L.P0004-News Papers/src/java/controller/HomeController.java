@@ -71,6 +71,11 @@ public class HomeController extends HttpServlet {
             if (url.startsWith(request.getContextPath() + "/home-page")) {
                 currentNews = listRecentNews.get(0);
             } else if (url.startsWith(request.getContextPath() + "/view")) {
+                
+                if(request.getParameter("id") == null){
+                    throw new Exception("News do not exist!!!");
+                }
+                
                 int id = Integer.parseInt(request.getParameter("id"));
                 currentNews = newsDAO.findById(id);
                 if (currentNews == null) {
